@@ -3,21 +3,23 @@ import pickle
 
 app = Flask(__name__)
 
-# Load your .pkl file
+reduced_data = pickle.load(open('reduced_movies.pkl', 'rb'))
 
-@app.route('/')
+@app.route('/api/data', methods=['GET'])
 def get_data():
-    # Load the data from the .pkl file
-    data = "Hello"
-    # Return the data as JSON
-    return jsonify(data)
+    return jsonify(reduced_data)
 
-@app.route('/api/data')
-def get_data():
-    # Load the data from the .pkl file
-    data = "Hello"
-    # Return the data as JSON
-    return jsonify(data)
+@app.route("/api/<string:movie>")
+def predict(movie):
+    
+
+    # recommended_movies = []
+    
+    # for recommended_movie in movie_data['recommendations']:
+    #     recommended_movies.append(recommended_movie['movie_id'])
+        
+    return jsonify(reduced_data[0])
+
 
 if __name__ == '__main__':
     app.run(debug=True)
